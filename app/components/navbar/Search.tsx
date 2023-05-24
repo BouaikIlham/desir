@@ -15,13 +15,13 @@ const Search = () => {
                       flex-row
                       items center 
                       justify-between">
-        <div className="text-sm font-bold px-6">
+        <div className="text-sm font-medium px-6">
           Anywhere
         </div>
         <div
           className="hidden
                         sm:block
-                        font-bold
+                        font-medium
                         px-6
                         text-sm
                         text-center
