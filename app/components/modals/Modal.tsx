@@ -73,7 +73,7 @@ const Modal: React.FC<ModalProps> = ({
                                            hover:opacity-70
                                            transition
                                            absolute
-                                           left-9">
+                                           right-9">
                             <IoMdClose size={18} />
                         </button>
                         <div className="text-lg font-semibold">
@@ -86,7 +86,11 @@ const Modal: React.FC<ModalProps> = ({
                     {/* Footer */}
                     <div className="flex flex-col gap-2 p-6">
                         <div className="flex flex-row items-center gap-4 w-full">
-                           <Button />
+                           <Button
+                                label={actionLabel}
+                                onClick={() => {}}
+                                disabled={disabled}
+                            />
                         </div>
                         {footer}
                     </div>
