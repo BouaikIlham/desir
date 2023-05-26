@@ -1,5 +1,5 @@
 'use client'
-import Avatar from './Avatar'
+import Avatar from '../../components/Avatar'
 import MenuItem from './MenuItem'
 import {AiOutlineMenu} from 'react-icons/ai'
 import { useState, useCallback } from 'react'

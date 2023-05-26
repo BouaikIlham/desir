@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import placeholder from "../../../public/images/placeholder.jpg"
+import placeholder from "../../public/images/placeholder.jpg"
 const Avatar = () => {
   return (
     <Image
