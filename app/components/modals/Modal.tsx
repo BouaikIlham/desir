@@ -1,7 +1,27 @@
 'use client'
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
-const Modal = () => {
+
+interface ModalProps {
+    isOpen?: boolean;
+    onClose: () => void;
+    onSubmit: () => void;
+    title?: string;
+    body?: React.ReactElement;
+    footer?: React.ReactElement;
+    actionLabel: string;
+    disabled?: boolean;
+}
+const Modal: React.FC<ModalProps> = ({
+    isOpen,
+    onClose,
+    onSubmit,
+    title,
+    body,
+    footer,
+    actionLabel,
+    disabled
+}) => {
   return (
     <>
     <div className="flex
@@ -47,7 +67,8 @@ const Modal = () => {
                                     justify-center                                    
                                     relative
                                     border-b-[1px]">
-                        <button className="p-1
+                        <button onClick={() => {}}
+                                className="p-1
                                            border-0
                                            hover:opacity-70
                                            transition
@@ -56,18 +77,18 @@ const Modal = () => {
                             <IoMdClose size={18} />
                         </button>
                         <div className="text-lg font-semibold">
-                            title
+                            {title}
                         </div>
                     </div>
                     <div className="relative p-6 flex-auto">
-                        body
+                        {body}
                     </div>
                     {/* Footer */}
                     <div className="flex flex-col gap-2 p-6">
                         <div className="flex flex-row items-center gap-4 w-full">
                            <Button />
                         </div>
-                        footer
+                        {footer}
                     </div>
                 </div>     
             </div>
