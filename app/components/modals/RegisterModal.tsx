@@ -8,6 +8,7 @@ import { useState } from "react"
 import { useForm, FieldValues, SubmitHandler} from "react-hook-form"
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios"
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
   const [isLoading, setIsLoading] = useState(false)
@@ -21,7 +22,13 @@ const RegisterModal = () => {
   });
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true)
-      // Post method
+      axios.post('api/register', data)
+      .then(() => {
+        alert('successfully')
+      })
+      .catch((error) => {
+        alert(error)
+      })
   }
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -93,7 +100,7 @@ const RegisterModal = () => {
       isOpen={registerModal.isOpen}
       disabled={isLoading}
       onClose={registerModal.onClose}
-      onSubmit={() => handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
       actionLabel="Continue"
       body={bodyContent}
       footer={footerContent}
