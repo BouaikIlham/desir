@@ -4,6 +4,7 @@ import useRegisterModal from "../../hooks/UseRegisterModals"
 import useLoginModal from "@/app/hooks/UseLoginModals"
 import Heading from "../Heading"
 import Input from "../inputs/Input"
+import {signIn} from 'next-auth/react'
 import Button from "../Button"
 import { useState, useCallback } from "react"
 import { useForm, FieldValues, SubmitHandler} from "react-hook-form"
@@ -88,7 +89,7 @@ const RegisterModal = () => {
           outline
           label="Contine with Google"
           icon={FcGoogle}
-          onClick={() => {}}
+          onClick={() => {signIn('google')}}
         />
         <Button
           outline
