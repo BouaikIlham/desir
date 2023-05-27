@@ -9,6 +9,7 @@ import { useForm, FieldValues, SubmitHandler} from "react-hook-form"
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios"
+import { toast } from "react-hot-toast"
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
   const [isLoading, setIsLoading] = useState(false)
@@ -24,10 +25,14 @@ const RegisterModal = () => {
     setIsLoading(true)
       axios.post('api/register', data)
       .then(() => {
-        alert('successfully')
+        toast.success("Sign up successfully")
+        registerModal.onClose()
       })
-      .catch((error) => {
-        alert(error)
+      .catch(() => {
+        toast.error("something went wrong")
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
   const bodyContent = (
@@ -43,6 +48,7 @@ const RegisterModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
+        type="text"
       />
        <Input
         id="email"
@@ -50,6 +56,7 @@ const RegisterModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
+        type="email"
       />
        <Input
         id="password"
@@ -57,6 +64,7 @@ const RegisterModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
+        type="password"
       />
     </div>
   )

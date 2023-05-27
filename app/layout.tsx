@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast'
 import RegisterModal from './components/modals/RegisterModal'
 import Navbar from './components/navbar/Navbar'
 import './globals.css'
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster />
         <RegisterModal />
         <Navbar />
         <div className="pb-20 pt-28">
