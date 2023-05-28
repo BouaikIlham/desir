@@ -5,7 +5,16 @@ import {AiOutlineMenu} from 'react-icons/ai'
 import { useState, useCallback } from 'react'
 import useRegisterModal from '@/app/hooks/UseRegisterModals'
 import useLoginModal from '@/app/hooks/UseLoginModals'
-const UserMenu = () => {
+import { User } from '@prisma/client'
+
+interface UserMenuProps {
+  currentUser?: User | null
+}
+const UserMenu: React.FC<UserMenuProps> = ({
+  currentUser
+}) => {
+
+  console.log(currentUser)
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
   const [isOpen, setIsOpen] = useState(false)
@@ -53,14 +62,31 @@ const UserMenu = () => {
             top-12
             text-sm">
               <div className="flex flex-col cursor-pointer">
-              <MenuItem
-                onClick={registerModal.onOpen}
-                label="Sign up"
-               />
-               <MenuItem
-                onClick={loginModal.onOpen}         
-                label="Login"
-               />
+              {currentUser ? (
+                <>
+                   <MenuItem
+                    onClick={() => {}}
+                    label="My reservations"
+                  />
+                  <MenuItem
+                    onClick={() => {}}         
+                    label="Logout"
+                  />
+                </>
+              ) : 
+              (
+                <>
+                 <MenuItem
+                  onClick={registerModal.onOpen}
+                  label="Sign up"
+                />
+                <MenuItem
+                  onClick={loginModal.onOpen}         
+                  label="Login"
+                />
+                </>
+              )
+              }
               </div>
           </div>
       )}
