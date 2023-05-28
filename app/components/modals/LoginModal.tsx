@@ -5,13 +5,16 @@ import useRegisterModal from "@/app/hooks/UseRegisterModals"
 import Heading from "../Heading"
 import Input from "../inputs/Input"
 import Button from "../Button"
-import { useState, useCallback } from "react"
+import { useState, useCallback} from "react"
 import { useForm, FieldValues, SubmitHandler} from "react-hook-form"
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import {signIn} from 'next-auth/react'
 import { toast } from "react-hot-toast"
+import { useRouter } from "next/navigation"
 const LoginModal = () => {
+
+  const router = useRouter()
   const loginModal = useLoginModal()
   const registerModal = useRegisterModal()
   const [isLoading, setIsLoading] = useState(false)
@@ -38,6 +41,7 @@ const LoginModal = () => {
         setIsLoading(false)
         if(callback?.ok) {
             toast.success("Logged in")
+            router.refresh()
             loginModal.onClose()
         }
         if (callback?.error) {
