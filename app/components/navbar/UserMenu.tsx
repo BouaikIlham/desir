@@ -7,6 +7,7 @@ import useRegisterModal from '@/app/hooks/UseRegisterModals'
 import useLoginModal from '@/app/hooks/UseLoginModals'
 import { User } from '@prisma/client'
 import {signOut} from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 interface UserMenuProps {
   currentUser?: User | null
@@ -17,6 +18,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter()
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value)
   }, [])
@@ -70,6 +72,10 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   <MenuItem
                     onClick={() => {signOut()}}         
                     label="Logout"
+                  />
+                  <MenuItem
+                    onClick={() => router.push("/user")}         
+                    label="My profile"
                   />
                 </>
               ) : 
