@@ -22,6 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({
                        onClick={() => route.push("/dashboard")}>Dashboard
                     </button>
                     <Search />
+                    <p>{currentUser?.email}</p>
                     <UserMenu currentUser={currentUser}  />
                 </div>
             </Container>

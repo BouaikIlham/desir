@@ -6,9 +6,9 @@ const page = async () => {
     if(currentUser?.role !== "ADMIN") {
       throw new Error('You need to be an admin')
     }
-  return (
-    <div>An admin only page</div>
-  )
+    return (
+        <div>An admin only page</div>
+    )
 }
 
 export default page
