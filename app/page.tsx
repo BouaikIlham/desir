@@ -1,7 +1,16 @@
-export default function Home() {
+import Navbar from "./components/navbar/Navbar";
+import getCurrentUser from './actions/getCurrentUser'
+
+export default async function  Home() {
+  const currentUser = await getCurrentUser();
+
   return (
-    <div>
-     Cars
-    </div>
+    <>
+       <Navbar currentUser={currentUser} />
+        <div>
+          Cars
+        </div>
+    </>
+   
   )
 }

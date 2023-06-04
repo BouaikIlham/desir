@@ -1,7 +1,6 @@
 import { Toaster } from 'react-hot-toast'
 import RegisterModal from './components/modals/RegisterModal'
 import LoginModal from './components/modals/LoginModal'
-import Navbar from './components/navbar/Navbar'
 import getCurrentUser from './actions/getCurrentUser'
 import './globals.css'
 import { Inter } from 'next/font/google'
@@ -26,7 +25,6 @@ export default async function RootLayout({
         <Toaster />
         <LoginModal />
         <RegisterModal />
-        <Navbar currentUser={currentUser} />      
         <div className="pb-20 pt-28">
           {children}
         </div>
