@@ -26,17 +26,19 @@ model User {
   updatedAt DateTime @updatedAt
   role UserRole @default(USER)
   accounts Account[]
-  sessions Session[]
+  cars Car[]
+  reservations Reservation[]
+  // sessions Session[]
 
 }
 
-model Session {
-  id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String @unique
-  userId String  @db.ObjectId
-  expires DateTime
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+// model Session {
+//   id    String   @id @default(auto()) @map("_id") @db.ObjectId
+//   sessionToken String @unique
+//   userId String  @db.ObjectId
+//   expires DateTime
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }
 
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
@@ -56,4 +58,34 @@ model Account {
 
   @@unique([provider, providerAccountId])
   
+}
+
+model Car {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  title String 
+  description String
+  imageSrc String
+  createdAt DateTime @default(now())
+  category String 
+  model String
+  locationValue String
+  price Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+
+}
+
+model Reservation {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  carId String @db.ObjectId
+  startDate DateTime
+  endDate DateTime
+  totalPrice Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car Car @relation(fields: [carId], references: [id], onDelete: Cascade)
 }

@@ -1,13 +1,17 @@
 import getCurrentUser from "../actions/getCurrentUser"
-
+import Admin from "./Admin"
 
 const page = async () => {
     const currentUser = await getCurrentUser()
+    console.log(currentUser?.role)
     if(currentUser?.role !== "ADMIN") {
-      throw new Error('You need to be an admin')
+      return <Admin/>
     }
     return (
+      <>
         <div>An admin only page</div>
+        <p>Add cars</p>
+      </>
     )
 }
 

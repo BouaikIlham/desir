@@ -28,7 +28,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <div onClick={() => {}}
             className="hidden md:block
                         text-sm font-medium py-3 px-4 rounded-full">
-          Airbnb your home
+          Welcome {currentUser?.name}
         </div>
         <div
          onClick={toggleOpen}
