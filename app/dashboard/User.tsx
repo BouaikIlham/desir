@@ -29,7 +29,7 @@ const User: React.FC<UserProps> = ({
  
                 <Button
                     outline
-                    label={"Back to the home page"}
+                    label={"Back to  home page"}
                     onClick={() => router.push('/')}
                 />
         </div>

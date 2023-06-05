@@ -25,7 +25,7 @@ export default async function RootLayout({
         <Toaster />
         <LoginModal />
         <RegisterModal />
-        <div className="pb-20">
+        <div className="">
           {children}
         </div>
       </body>
