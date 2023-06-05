@@ -9,7 +9,7 @@ const page = async () => {
       return <User/>
     }
     return (
-     <Admin />
+      <Admin />
     )
 }
 

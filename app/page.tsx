@@ -8,7 +8,7 @@ export default async function  Home() {
     <>
        <Navbar currentUser={currentUser} />
         <div>
-          Cars
+          Cars for users
         </div>
     </>
    
