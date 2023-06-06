@@ -1,9 +1,10 @@
+import Cars from "./Cars"
 import Admin from "../dashboard/Admin"
 
-const page = () => {
+const page =  () => {
   return (
     <Admin>
-      <button>Add Car</button>
+      <Cars />
     </Admin>
   )
 }

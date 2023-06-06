@@ -6,10 +6,10 @@ interface RentalModalStore {
     onClose: () => void
 }
 
-const useRentalModal = create<RentalModalStore>((set) => ({
+const UseRentalModal = create<RentalModalStore>((set) => ({
     isOpen: false,
     onOpen: () => set({isOpen: true}),
     onClose: () => set({isOpen: false})
 }))
 
-export default useRentalModal;
+export default UseRentalModal;
