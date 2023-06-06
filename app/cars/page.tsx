@@ -3,7 +3,7 @@ import Admin from "../dashboard/Admin"
 const page = () => {
   return (
     <Admin>
-        cars here
+      <button>Add Car</button>
     </Admin>
   )
 }
