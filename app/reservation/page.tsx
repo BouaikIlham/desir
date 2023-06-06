@@ -2,9 +2,9 @@ import Admin from "../dashboard/Admin"
 
 const page = () => {
   return (
-    <Admin>
-        cars here
-    </Admin>
+    <Admin>      
+        reservation here
+    </Admin>  
   )
 }
 
