@@ -113,7 +113,7 @@ const RentModal = () => {
                 subtitle="what amenities do you have"
             />
             <Input
-                id="title"
+                id="model"
                 label='model'
                 disabled={isLoading}
                 register={register}
@@ -132,6 +132,56 @@ const RentModal = () => {
               onChange={(value) => setCustomValue("imageSrc", value)}
             />
         </div>
+    )
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+      <Heading
+         title="How would you describe your car?"
+         subtitle="Short and sweet works best!"
+       />
+       <Input
+          id="title"
+          label='Title'
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <hr />
+
+        <Input
+          id="description"
+          label='Description'
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+    </div>
+    )
+  }
+
+  if(step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Now set your price"
+          subtitle="How much do you charge per night?"
+        />
+        <Input
+          id="price"
+          label="Price"
+          formatPrice={true}
+          type="number"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
     )
   }
 
