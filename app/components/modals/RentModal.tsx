@@ -30,7 +30,6 @@ const RentModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: "",
-      location: null,
       imageSrc: "",
       price: 1,
       title: "",
@@ -42,9 +41,6 @@ const RentModal = () => {
 
   const category = watch("category");
   const imageSrc = watch("imageSrc");
-
-  console.log(imageSrc)
-
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -67,7 +63,7 @@ const RentModal = () => {
     }
 
     setIsLoading(true);
-    // console.log(data);
+    console.log(data);
   };
 
   const actionLabel = useMemo(() => {
@@ -96,8 +92,8 @@ const RentModal = () => {
             <CategoryInput
               label={item.label}
               icon={item.icon}
-              onClick={() => {}}
-              selected
+              onClick={(category) => setCustomValue('category', category)}
+              selected={category === item.label}
             />
           </div>
         ))}
