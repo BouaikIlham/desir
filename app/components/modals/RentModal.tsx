@@ -5,14 +5,14 @@ import { useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Heading from "../Heading";
 import CategoryInput from "../inputs/CategoryInput";
+import Input from "../inputs/Input";
 import { categories } from "../navbar/Categories";
 enum STEPS {
   CATEGORY = 0,
-  LOCATION = 1,
-  INFO = 2,
-  IMAGES = 3,
-  DESCRIPTION = 4,
-  PRICE = 5,
+  INFO = 1,
+  IMAGES = 2,
+  DESCRIPTION = 3,
+  PRICE = 4,
 }
 const RentModal = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
@@ -36,7 +36,6 @@ const RentModal = () => {
     },
   });
   const category = watch("category");
-  const location = watch("location");
   const imageSrc = watch("imageSrc");
 
   const onBack = () => {
@@ -66,12 +65,11 @@ const RentModal = () => {
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.CATEGORY) {
-      return undefined;
+      return  undefined;
     }
-
     return "Back";
   }, [step]);
-  const bodyContent = (
+  let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
         title="what of these describes your car ?"
@@ -91,19 +89,32 @@ const RentModal = () => {
       </div>
     </div>
   );
-  const footerContent = (
-    <div>
-      <h2>footerContent</h2>
-    </div>
-  );
+
+  if (step === STEPS.INFO) {
+    bodyContent = (
+        <div className="flex flex-col gap-8">
+            <Heading
+                title="Share some basics about your place"
+                subtitle="what amenities do you have"
+            />
+            <Input
+                id="title"
+                label='model'
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required
+            />
+        </div>
+    )
+  }
   return (
     <Modal
       isOpen={rentalModal.isOpen}
       onClose={rentalModal.onClose}
-      onSubmit={() => {}}
-      title="hello"
+      onSubmit={handleSubmit(onSubmit)}
+      title="Add Car"
       body={bodyContent}
-      footer={footerContent}
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}

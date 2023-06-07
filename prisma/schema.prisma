@@ -69,7 +69,6 @@ model Car {
   createdAt DateTime @default(now())
   category String 
   model String
-  locationValue String
   price Int
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
