@@ -43,7 +43,7 @@ const RentModal = () => {
   const category = watch("category");
   const imageSrc = watch("imageSrc");
 
-  // console.log(category)
+  console.log(imageSrc)
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -96,7 +96,7 @@ const RentModal = () => {
             <CategoryInput
               label={item.label}
               icon={item.icon}
-              onClick={(category) => setCustomValue('category', category)}
+              onClick={() => {}}
               selected
             />
           </div>
