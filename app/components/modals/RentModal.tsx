@@ -7,6 +7,8 @@ import Heading from "../Heading";
 import CategoryInput from "../inputs/CategoryInput";
 import Input from "../inputs/Input";
 import { categories } from "../navbar/Categories";
+import ImageUpload from "../inputs/ImageUpload";
+
 enum STEPS {
   CATEGORY = 0,
   INFO = 1,
@@ -33,10 +35,23 @@ const RentModal = () => {
       price: 1,
       title: "",
       description: "",
+      model: ""
     },
   });
+
+
   const category = watch("category");
   const imageSrc = watch("imageSrc");
+
+  // console.log(category)
+
+  const setCustomValue = (id: string, value: any) => {
+    setValue(id, value, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    })
+  }
 
   const onBack = () => {
     setStep((value) => value - 1);
@@ -52,7 +67,7 @@ const RentModal = () => {
     }
 
     setIsLoading(true);
-    console.log(data);
+    // console.log(data);
   };
 
   const actionLabel = useMemo(() => {
@@ -76,12 +91,12 @@ const RentModal = () => {
         subtitle="pick a category"
       />
       <div className="grid grid-col-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
-        {categories.map((category) => (
-          <div key={category.label} className="col-span-1">
+        {categories.map((item) => (
+          <div key={item.label} className="col-span-1">
             <CategoryInput
-              label={category.label}
-              icon={category.icon}
-              onClick={() => {}}
+              label={item.label}
+              icon={item.icon}
+              onClick={(category) => setCustomValue('category', category)}
               selected
             />
           </div>
@@ -94,7 +109,7 @@ const RentModal = () => {
     bodyContent = (
         <div className="flex flex-col gap-8">
             <Heading
-                title="Share some basics about your place"
+                title="Share some basics about your car"
                 subtitle="what amenities do you have"
             />
             <Input
@@ -108,6 +123,18 @@ const RentModal = () => {
         </div>
     )
   }
+
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+        <div className="flex flex-col gap-8">
+            <ImageUpload
+              value={imageSrc}
+              onChange={(value) => setCustomValue("imageSrc", value)}
+            />
+        </div>
+    )
+  }
+
   return (
     <Modal
       isOpen={rentalModal.isOpen}

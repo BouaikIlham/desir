@@ -16,7 +16,8 @@ const CategoryInput: React.FC<CategoryInputProps>= ({
     selected
 }) => {
   return (
-    <div className={`rounded-xl
+    <div  onClick={() => onClick(label)}
+          className={`rounded-xl
                      border-2
                      p-4
                      flex
