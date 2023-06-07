@@ -11,6 +11,8 @@ interface ModalProps {
     body?: React.ReactElement;
     footer?: React.ReactElement;
     actionLabel: string;
+    secondaryActionLabel?: string;
+    secondaryAction?: () => void
     disabled?: boolean;
 }
 const Modal: React.FC<ModalProps> = ({
@@ -21,7 +23,9 @@ const Modal: React.FC<ModalProps> = ({
     body,
     footer,
     actionLabel,
-    disabled
+    disabled,
+    secondaryAction,
+    secondaryActionLabel
 }) => {
     const [showModal, setShowModal] = useState(isOpen)
     useEffect(() => {
@@ -44,6 +48,13 @@ const Modal: React.FC<ModalProps> = ({
         }
         onSubmit()
     }, [onSubmit, disabled])
+    const handleSecondaryAction = useCallback(() => {
+        if (disabled || !secondaryAction) {
+          return;
+        }
+    
+        secondaryAction();
+      }, [secondaryAction, disabled ]);
     if (!isOpen) {
         return null;
     }
@@ -111,6 +122,14 @@ const Modal: React.FC<ModalProps> = ({
                         {/* Footer */}
                         <div className="flex flex-col gap-2 p-6">
                             <div className="flex flex-row items-center gap-4 w-full">
+                            {secondaryAction && secondaryActionLabel && (
+                                <Button 
+                                    outline
+                                    disabled={disabled}
+                                    label={secondaryActionLabel}
+                                    onClick={handleSecondaryAction}
+                                />
+                            )}
                             <Button
                                     label={actionLabel}
                                     onClick={handleSubmit}
