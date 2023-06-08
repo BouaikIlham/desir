@@ -8,6 +8,9 @@ import CategoryInput from "../inputs/CategoryInput";
 import Input from "../inputs/Input";
 import { categories } from "../navbar/Categories";
 import ImageUpload from "../inputs/ImageUpload";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 enum STEPS {
   CATEGORY = 0,
@@ -19,6 +22,7 @@ enum STEPS {
 const RentModal = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
   const rentalModal = UseRentalModal();
 
   const {
@@ -57,14 +61,29 @@ const RentModal = () => {
     setStep((value) => value + 1);
   };
 
+
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     if (step !== STEPS.PRICE) {
       return onNext();
     }
-
-    setIsLoading(true);
-    console.log(data);
+    setIsLoading(true)
+    axios.post('/api/cars', data)
+      .then(() => {
+        toast.success('Car created successfully')
+        rentalModal.onClose()
+        router.refresh()
+      })
+      .catch(() => {
+        toast.error('something went wrong .')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   };
+
+
+
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
