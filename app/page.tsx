@@ -8,7 +8,6 @@ import CarCard from "./components/cars/CarCard";
 export default async function  Home() {
   const currentUser = await getCurrentUser();
   const cars  = await getCars();
-  console.log(cars)
   const isEmpty = false
 
   if (isEmpty) {
