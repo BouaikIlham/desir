@@ -1,6 +1,10 @@
-import React from 'react'
+import getCarById from "@/app/actions/getCarById"
 
-const page = () => {
+interface IParams {
+    carId?: string;
+}
+const page = async ({params} : {params: IParams}) => {
+    const car = await getCarById(params)
   return (
     <div>car id</div>
   )
