@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Car, User } from "@prisma/client"
 import HeartButton from "../HeartButton";
-
+import { useRouter } from "next/navigation";
 interface CarCardProps {
     currentUser?: User | null;
     data: Car;
@@ -11,8 +11,9 @@ const CarCard: React.FC<CarCardProps> = ({
     currentUser,
     data
 }) => {
+    const router = useRouter()
   return (
-    <div onClick={() => {}}
+    <div onClick={() => router.push(`/cars/${data.id}`)}
          className="col-span-1 cursor-pointer group">
         <div className="flex flex-col gap- w-full">
             <div className="aspect-square w-full relative overflow-hidden rounded-xl">
