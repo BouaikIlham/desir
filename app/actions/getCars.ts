@@ -9,7 +9,10 @@ export default async function getCars() {
             }
         });
 
-        return cars
+        const safeCars = cars.map((car) => ({
+            ...car,
+            createdAt: car.createdAt.toISOString(),
+        }))
 
     } catch (error:any) {
         throw new Error(error)
