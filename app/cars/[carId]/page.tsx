@@ -16,7 +16,9 @@ const page = async ({params} : {params: IParams}) => {
   return (
     <>
         <Navbar />
-        <CarClient />
+        <CarClient
+        
+        />
     </>
   )
 }

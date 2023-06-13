@@ -5,7 +5,7 @@ import HeartButton from "../HeartButton"
 const CarHead = () => {
   return (
     <>
-        <Heading
+        {/* <Heading
             title={}
             subtitle={}
         />
@@ -29,7 +29,7 @@ const CarHead = () => {
                  
                 />
             </div>
-        </div>
+        </div> */}
     </>
   )
 }
