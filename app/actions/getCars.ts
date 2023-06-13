@@ -14,6 +14,8 @@ export default async function getCars() {
             createdAt: car.createdAt.toISOString(),
         }))
 
+        return safeCars
+
     } catch (error:any) {
         throw new Error(error)
     }
