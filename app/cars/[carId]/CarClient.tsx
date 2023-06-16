@@ -5,6 +5,7 @@ import { Car, User } from "@prisma/client"
 import CarInfo from "@/app/components/cars/CarInfo"
 import { useMemo } from "react"
 import { categories } from "@/app/components/navbar/Categories"
+import CarReservation from "@/app/components/cars/CarReservation"
 
 interface CarClientProps {
   car: Car & {
@@ -44,6 +45,13 @@ const CarClient: React.FC<CarClientProps> = ({
                 category={category}
                 description={car.description}
               />
+              <div className="order-first mb-10 md:order-last md:col-span-3">
+                <CarReservation
+                  price={car.price}
+                  // totalPrice={}
+                />
+              </div>
+
           </div>
         </div>
       </div>
