@@ -2,12 +2,28 @@
 
 import Image from "next/image"
 import HeartButton from "../HeartButton"
-const CarHead = () => {
+import { User } from "@prisma/client"
+import Heading from "../Heading"
+
+interface CarHead {
+    title: string
+    id: string
+    imageSrc: string
+    description: string
+    currentUser?: User | null
+}
+const CarHead: React.FC<CarHead> = ({
+    title,
+    id,
+    imageSrc,
+    currentUser,
+    description
+}) => {
   return (
     <>
-        {/* <Heading
-            title={}
-            subtitle={}
+        <Heading
+            title={title}
+            subtitle={description}
         />
 
 
@@ -19,17 +35,18 @@ const CarHead = () => {
                         relative">
             <Image
                 alt="Image"
-                src={}
+                src={imageSrc}
                 fill
                 className="object-cover w-full"
             />
 
             <div className="absolute top-5 right-5">
                 <HeartButton
-                 
+                    carId={id}
+                    currentUser={currentUser}
                 />
             </div>
-        </div> */}
+        </div>
     </>
   )
 }

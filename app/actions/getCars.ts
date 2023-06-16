@@ -11,7 +11,7 @@ export default async function getCars() {
 
         const safeCars = cars.map((car) => ({
             ...car,
-            createdAt: car.createdAt.toISOString(),
+            // createdAt: car.createdAt.toISOString(),
         }))
 
         return safeCars

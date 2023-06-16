@@ -1,13 +1,31 @@
 'use client'
 import CarHead from "@/app/components/cars/CarHead"
 import Container from "@/app/components/Container"
+import { Car, User } from "@prisma/client"
 
-const CarClient = () => {
+
+interface CarClientProps {
+  car: Car & {
+    user: User;
+  };
+
+  currentUser?: User | null
+}
+const CarClient: React.FC<CarClientProps> = ({
+  car,
+  currentUser
+}) => {
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <div className="flex flex-col gap-6">
-          <CarHead />
+          <CarHead
+            title={car.title}
+            imageSrc={car.imageSrc}
+            id={car.id}
+            description={car.description}
+            currentUser={currentUser}
+          />
         </div>
       </div>
     </Container>
