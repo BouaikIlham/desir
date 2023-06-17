@@ -1,9 +1,9 @@
 "use client";
-import { User } from "@prisma/client";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { SafeUser } from "../types";
 interface HeartButtonProps {
   carId: string;
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 const HeartButton: React.FC<HeartButtonProps> = ({

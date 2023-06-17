@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "../libs/prismadb"
 
-const prisma = new PrismaClient()
 export default async function getCars() {
     try {
         const cars = await prisma.car.findMany({
@@ -11,7 +10,7 @@ export default async function getCars() {
 
         const safeCars = cars.map((car) => ({
             ...car,
-            // createdAt: car.createdAt.toISOString(),
+            createdAt: car.createdAt.toISOString(),
         }))
 
         return safeCars

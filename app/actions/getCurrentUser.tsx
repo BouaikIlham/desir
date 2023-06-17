@@ -1,8 +1,6 @@
 import {getServerSession} from "next-auth"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient()
+import prisma from "../libs/prismadb"
 
 export async function getSession() {
     return await getServerSession(authOptions)
@@ -27,10 +25,10 @@ export default async function getCurrentUser() {
 
         return {
             ...currentUser,
-            // createdAt: currentUser.createdAt.toISOString(),
-            // updatedAt: currentUser.updatedAt.toDateString(),
-            // emailVerified:
-            //     currentUser.emailVerified?.toISOString() || null,
+            createdAt: currentUser.createdAt.toISOString(),
+            updatedAt: currentUser.updatedAt.toDateString(),
+            emailVerified:
+                currentUser.emailVerified?.toISOString() || null,
         }
     } catch (error: any) {
         return null

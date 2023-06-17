@@ -1,18 +1,23 @@
 'use client'
 import CarHead from "@/app/components/cars/CarHead"
 import Container from "@/app/components/Container"
-import { Car, User } from "@prisma/client"
+import { SafeCar, SafeUser } from "@/app/types"
 import CarInfo from "@/app/components/cars/CarInfo"
 import { useMemo } from "react"
 import { categories } from "@/app/components/navbar/Categories"
 import CarReservation from "@/app/components/cars/CarReservation"
 
+const initialDateRange = {
+  startDate: new Date(),
+  endDate: new Date(),
+  key: 'selection'
+}
 interface CarClientProps {
-  car: Car & {
-    user: User;
-  };
+  car: SafeCar & {
+    user: SafeUser;
+  } 
 
-  currentUser?: User | null
+  currentUser?: SafeUser | null
 }
 const CarClient: React.FC<CarClientProps> = ({
   car,

@@ -1,11 +1,10 @@
 'use client'
-
-import { User } from "@prisma/client"
 import { IconType } from "react-icons"
 import Avatar from "../Avatar"
 import CarCategory from "./CarCategory"
+import { SafeUser } from "@/app/types"
 interface CarInfo  {
-    user: User | null 
+    user: SafeUser | null 
     category: 
       | {
         icon: IconType;

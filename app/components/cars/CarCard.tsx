@@ -1,11 +1,11 @@
 'use client'
 import Image from "next/image";
-import { Car, User } from "@prisma/client"
 import HeartButton from "../HeartButton";
 import { useRouter } from "next/navigation";
+import { SafeCar, SafeUser } from "@/app/types";
 interface CarCardProps {
-    currentUser?: User | null;
-    data: Car;
+    currentUser?: SafeUser | null;
+    data: SafeCar;
 }
 const CarCard: React.FC<CarCardProps> = ({
     currentUser,

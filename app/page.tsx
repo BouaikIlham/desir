@@ -32,7 +32,7 @@ export default async function  Home() {
                           xl:grid-cols-5
                           2xl:grid-cols-6
                           gap-8">
-          {cars.map((car: any) => {
+          {cars.map((car) => {
             return (
               <CarCard
                 currentUser={currentUser}

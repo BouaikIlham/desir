@@ -2,15 +2,15 @@
 
 import Image from "next/image"
 import HeartButton from "../HeartButton"
-import { User } from "@prisma/client"
 import Heading from "../Heading"
+import { SafeUser } from "@/app/types"
 
 interface CarHead {
     title: string
     id: string
     imageSrc: string
     description: string
-    currentUser?: User | null
+    currentUser?: SafeUser | null
 }
 const CarHead: React.FC<CarHead> = ({
     title,

@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "../libs/prismadb"
 
 interface IParams {
   carId?: string;
@@ -24,14 +22,14 @@ export default async function getCarById(params: IParams) {
 
     return {
         ...car,
-        // createdAt: car.createdAt.toString(),
-        // user: {
-        //   ...car.user,
-        //   createdAt: car.user.createdAt.toString(),
-        //   updatedAt: car.user.updatedAt.toString(),
-        //   emailVerified: 
-        //     car.user.emailVerified?.toString() || null,
-        // }
+        createdAt: car.createdAt.toISOString(),
+        user: {
+          ...car.user,
+          createdAt: car.user.createdAt.toISOString(),
+          updatedAt: car.user.updatedAt.toISOString(),
+          emailVerified: 
+            car.user.emailVerified?.toISOString() || null
+        }
     }
   } catch(error: any) {
     throw new Error(error)

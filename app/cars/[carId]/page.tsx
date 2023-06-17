@@ -10,21 +10,21 @@ interface IParams {
 const page = async ({params} : {params: IParams}) => {
     const car = await getCarById(params)
     const currentUser = await getCurrentUser()
-
-    console.log(car)
-
     if (!car) {
+      return (
         <EmptyState />
+       )
     }
-  return (
-    <>
-        <Navbar />
-        <CarClient
-          car={car}
-          currentUser={currentUser}
-        />
-    </>
-  )
+
+      return (
+        <>
+            <Navbar />
+            <CarClient
+              car={car}
+              currentUser={currentUser}
+            />
+        </>
+      )
 }
 
 export default page
