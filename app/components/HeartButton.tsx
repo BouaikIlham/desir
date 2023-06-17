@@ -28,6 +28,7 @@ const HeartButton: React.FC<HeartButtonProps> = ({
       />
       <AiFillHeart
         size={24}
+        className='fill-neutral-500/70'
       />
     </div>
   );
