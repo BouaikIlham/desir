@@ -1,5 +1,5 @@
 import { SafeUser } from "../types";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 interface IUseFavorite {
     carId: string;
@@ -8,6 +8,17 @@ interface IUseFavorite {
 
 const useFavorite = ({carId, currentUser}: IUseFavorite) => {
     const hasFavorited = useMemo(() => {
-        const list = currentUser?.favoriteIds
-    }, [])
+        const list = currentUser?.favoriteIds || []
+            return list.includes(carId)
+    }, [currentUser, carId])
+
+const toggleFavorite = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+}, [])
+
+    return {hasFavorited,
+            toggleFavorite
+            }
 }
+
+export default useFavorite
