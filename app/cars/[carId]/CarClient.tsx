@@ -1,11 +1,17 @@
 'use client'
+import { toast } from "react-hot-toast"
 import CarHead from "@/app/components/cars/CarHead"
 import Container from "@/app/components/Container"
 import { SafeCar, SafeUser } from "@/app/types"
 import CarInfo from "@/app/components/cars/CarInfo"
-import { useMemo } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { categories } from "@/app/components/navbar/Categories"
 import CarReservation from "@/app/components/cars/CarReservation"
+import { Reservation } from "@prisma/client"
+import useLoginModal from "@/app/hooks/UseLoginModals"
+import { useRouter } from "next/navigation"
+import { eachDayOfInterval } from "date-fns"
+import axios from "axios"
 
 const initialDateRange = {
   startDate: new Date(),
@@ -13,6 +19,7 @@ const initialDateRange = {
   key: 'selection'
 }
 interface CarClientProps {
+  reservations?: Reservation[]
   car: SafeCar & {
     user: SafeUser;
   } 
@@ -21,9 +28,64 @@ interface CarClientProps {
 }
 const CarClient: React.FC<CarClientProps> = ({
   car,
-  currentUser
+  currentUser,
+  reservations = []
 }) => {
+  const loginModal = useLoginModal();
+  const router = useRouter()
 
+  const disabledDates = useMemo(() => {
+    let dates: Date[] = []
+
+    reservations.forEach((reservation: any) => {
+      const range = eachDayOfInterval({
+        start: new Date(reservation.startDate),
+        end: new Date(reservation.endDate)
+      });
+
+      dates = [...dates, ...range]
+    });
+
+    return dates
+  }, [reservations])
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [totalPrice, setTotalPrice] = useState(car.price)
+  const [dateRange, setDateRange] = useState(initialDateRange)
+
+  const onCreateReservation = useCallback(() => {
+    if(!currentUser) {
+      return loginModal.onOpen()
+    }
+
+    setIsLoading(true);
+
+    axios.post('/api/reservations', {
+      totalPrice,
+      startDate: dateRange.startDate,
+      endDate: dateRange.endDate,
+      carId: car?.id
+    })
+    .then(() => {
+      toast.success('Car reserved!')
+      setDateRange(initialDateRange)
+        /// rediredt to trips
+
+        router.refresh();
+    })
+    .catch(() => {
+      toast.error('something went wrong.')
+    })
+    .finally(() => {
+      setIsLoading(false)
+    })
+  }, [
+    totalPrice,
+    dateRange,
+    router,
+    currentUser,
+    loginModal
+  ])
   const category = useMemo(() => {
     return categories.find((item) => item.label === car.category)
   }, [car.category])
@@ -53,7 +115,7 @@ const CarClient: React.FC<CarClientProps> = ({
               <div className="order-first mb-10 md:order-last md:col-span-3">
                 <CarReservation
                   price={car.price}
-                  // totalPrice={}
+                  totalPrice={totalPrice}
                 />
               </div>
 

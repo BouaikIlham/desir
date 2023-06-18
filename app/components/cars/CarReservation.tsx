@@ -2,6 +2,7 @@
 
 interface CarReservationProps {
     price: number
+    totalPrice?: number
 }
 const CarReservation: React.FC<CarReservationProps> = ({
     price
