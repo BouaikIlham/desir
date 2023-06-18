@@ -35,6 +35,21 @@ const CarReservation: React.FC<CarReservationProps> = ({
             disabledDates={disabledDates}
             onChange={(value) => onChangeDate(value.selection)}
         />
+        <hr />
+        <div className="p-4
+                        flex
+                        flex-row
+                        items-center
+                        justify-between
+                        font-semibold
+                        text-lg">
+            <div>
+                Totla
+            </div>
+            <div>
+                $ {totalPrice}
+            </div>
+        </div>
     </div>
   )
 }
