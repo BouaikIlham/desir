@@ -1,5 +1,6 @@
 'use client'
 import { Range } from 'react-date-range'
+import Calendar from '../inputs/Calendar';
 interface CarReservationProps {
     price: number;
     totalPrice?: number;
@@ -10,7 +11,13 @@ interface CarReservationProps {
     disabledDates: Date[]
 }
 const CarReservation: React.FC<CarReservationProps> = ({
-    price
+    price,
+    totalPrice,
+    dateRange,
+    onChangeDate,
+    onSubmit,
+    disabledDates,
+    disabled
 }) => {
   return (
     <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
@@ -23,6 +30,11 @@ const CarReservation: React.FC<CarReservationProps> = ({
             </div>
         </div>
         <hr />
+        <Calendar
+            value={dateRange}
+            disabledDates={disabledDates}
+            onChange={(value) => onChangeDate(value.selection)}
+        />
     </div>
   )
 }
