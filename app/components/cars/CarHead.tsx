@@ -33,6 +33,7 @@ const CarHead: React.FC<CarHead> = ({
                         overflow-hidden
                         rounded-xl
                         relative">
+          
             <Image
                 alt="Image"
                 src={imageSrc}
