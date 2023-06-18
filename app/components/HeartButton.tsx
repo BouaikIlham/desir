@@ -11,14 +11,14 @@ const HeartButton: React.FC<HeartButtonProps> = ({
   carId,
   currentUser,
 }) => {
-  const {hasFavorited} = useFavorite({
+  const {hasFavorited, toggleFavorite} = useFavorite({
     carId,
     currentUser
   })
-
+  console.log(hasFavorited)
   return (
     <div
-      onClick={() => {}}
+      onClick={toggleFavorite}
       className="relative
                         hover:opacity-80
                         transition
