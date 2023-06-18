@@ -4,13 +4,13 @@ import CarHead from "@/app/components/cars/CarHead"
 import Container from "@/app/components/Container"
 import { SafeCar, SafeUser } from "@/app/types"
 import CarInfo from "@/app/components/cars/CarInfo"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { categories } from "@/app/components/navbar/Categories"
 import CarReservation from "@/app/components/cars/CarReservation"
 import { Reservation } from "@prisma/client"
 import useLoginModal from "@/app/hooks/UseLoginModals"
 import { useRouter } from "next/navigation"
-import { eachDayOfInterval } from "date-fns"
+import { differenceInCalendarDays, eachDayOfInterval } from "date-fns"
 import axios from "axios"
 
 const initialDateRange = {
@@ -86,6 +86,20 @@ const CarClient: React.FC<CarClientProps> = ({
     currentUser,
     loginModal
   ])
+  useEffect(() => {
+    if (dateRange.startDate && dateRange.endDate) {
+      const dayCount = differenceInCalendarDays(
+        dateRange.startDate,
+        dateRange.endDate
+      );
+
+      if (dayCount && car.price) {
+        setTotalPrice(dayCount * car.price)
+      } else {
+        setTotalPrice(car.price)
+      }
+    }
+  }, [dateRange, car.price])
   const category = useMemo(() => {
     return categories.find((item) => item.label === car.category)
   }, [car.category])
@@ -114,8 +128,12 @@ const CarClient: React.FC<CarClientProps> = ({
               />
               <div className="order-first mb-10 md:order-last md:col-span-3">
                 <CarReservation
-                  price={car.price}
-                  totalPrice={totalPrice}
+                 price={car.price}
+                 totalPrice={totalPrice}
+                 onChangeDate={(value) => setDateRange(value)}
+                 dateRange={dateRange}
+                 disabled={isLoading}
+                 disabledDates={disabledDates}
                 />
               </div>
 
