@@ -12,6 +12,7 @@ import useLoginModal from "@/app/hooks/UseLoginModals"
 import { useRouter } from "next/navigation"
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns"
 import axios from "axios"
+import { Range } from "react-date-range"
 
 const initialDateRange = {
   startDate: new Date(),
@@ -51,7 +52,7 @@ const CarClient: React.FC<CarClientProps> = ({
 
   const [isLoading, setIsLoading] = useState(false)
   const [totalPrice, setTotalPrice] = useState(car.price)
-  const [dateRange, setDateRange] = useState(initialDateRange)
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange)
 
   const onCreateReservation = useCallback(() => {
     if(!currentUser) {
@@ -131,6 +132,7 @@ const CarClient: React.FC<CarClientProps> = ({
                  price={car.price}
                  totalPrice={totalPrice}
                  onChangeDate={(value) => setDateRange(value)}
+                 onSubmit={onCreateReservation}
                  dateRange={dateRange}
                  disabled={isLoading}
                  disabledDates={disabledDates}

@@ -1,8 +1,13 @@
 'use client'
-
+import { Range } from 'react-date-range'
 interface CarReservationProps {
-    price: number
-    totalPrice?: number
+    price: number;
+    totalPrice?: number;
+    dateRange: Range
+    onChangeDate: (value: Range) => void;
+    onSubmit: () => void;
+    disabled?: boolean
+    disabledDates: Date[]
 }
 const CarReservation: React.FC<CarReservationProps> = ({
     price
