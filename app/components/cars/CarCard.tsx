@@ -2,12 +2,15 @@
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import { useRouter } from "next/navigation";
-import { SafeCar, SafeUser } from "@/app/types";
+import { SafeCar, SafeReservation, SafeUser } from "@/app/types";
 import Button from "../Button";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { format } from "date-fns";
+
 interface CarCardProps {
   currentUser?: SafeUser | null;
   data: SafeCar;
+  reservation?: SafeReservation;
   actionLabel?: string;
   actionId?: string;
   onAction?: (id: string) => void;
@@ -20,15 +23,36 @@ const CarCard: React.FC<CarCardProps> = ({
   actionId = "",
   onAction,
   disabled,
+  reservation,
 }) => {
   const router = useRouter();
-  const handleCancel = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    if (disabled) {
-      return;
+  const handleCancel = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      if (disabled) {
+        return;
+      }
+      onAction?.(actionId);
+    },
+    [onAction, disabled, actionId]
+  );
+
+  const price = useMemo(() => {
+    if (reservation) {
+      return reservation.totalPrice;
     }
-     onAction?.(actionId);
-  }, [onAction, disabled, actionId]);
+    return data.price;
+  }, [reservation, data.price]);
+
+  const reservationDate = useMemo(() => {
+    if (!reservation) {
+      return null;
+    }
+
+    const start = new Date(reservation.startDate);
+    const end = new Date(reservation.endDate);
+    return `${format(start, "PP")} ${format(end, "PP")}`;
+  }, [reservation]);
   return (
     <>
       <div className="col-span-1 cursor-pointer group">
@@ -52,10 +76,13 @@ const CarCard: React.FC<CarCardProps> = ({
             </div>
           </div>
           <div className="font-semibold text-lg">{data.title}</div>
-          <div className="font-light text-neutral-500">{data.category}</div>
+          <div className="font-light text-neutral-500">
+            {reservationDate || data.category}
+          </div>
           <div className="flex flex-row items-center gap-1">
             <div className="font-semibold">
-              $ {data.price} <span className="font-light">/ night</span>
+              $ {price}
+              {!reservation && <span className="font-light">/ night</span>}
             </div>
             {onAction && actionLabel && (
               <Button
