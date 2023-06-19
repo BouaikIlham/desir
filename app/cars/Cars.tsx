@@ -1,10 +1,11 @@
 'use client'
-
+import axios from "axios";
 import UseRentalModal from "../hooks/UseRentalModal"
 import { useCallback, useState } from "react";
 import CarCard from "../components/cars/CarCard";
 import { useRouter } from "next/navigation";
 import { SafeCar, SafeUser } from "../types";
+import { toast } from "react-hot-toast";
 
 
 interface CarsProps {
@@ -23,9 +24,18 @@ const Cars: React.FC<CarsProps> = ({
    const router = useRouter()
   const [deletingId, setDeletingId] = useState('')
   const onCancel = useCallback((id: string) => {
-      console.log(id)
-      setDeletingId(id)
-  }, [])
+    axios.delete(`/api/cars/${id}`)
+    .then(() => {
+        toast.success('Car deleted')
+        router.refresh();
+    })
+    .catch(() => {
+        toast.error("Something went wrong!")
+    })
+    .finally(() => {
+        setDeletingId('')
+    })
+  }, [router])
   return (
         <>
             <button onClick={onRent}

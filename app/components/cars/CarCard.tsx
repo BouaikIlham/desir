@@ -17,14 +17,18 @@ const CarCard: React.FC<CarCardProps> = ({
   currentUser,
   data,
   actionLabel,
-  actionId,
+  actionId = "",
   onAction,
   disabled,
 }) => {
   const router = useRouter();
-  const handleCancel = useCallback(() => {
-    console.log("delete");
-  }, []);
+  const handleCancel = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (disabled) {
+      return;
+    }
+     onAction?.(actionId);
+  }, [onAction, disabled, actionId]);
   return (
     <>
       <div className="col-span-1 cursor-pointer group">
