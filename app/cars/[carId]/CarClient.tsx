@@ -90,8 +90,9 @@ const CarClient: React.FC<CarClientProps> = ({
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInCalendarDays(
-        dateRange.startDate,
-        dateRange.endDate
+        dateRange.endDate,
+        dateRange.startDate
+        
       );
 
       if (dayCount && car.price) {
