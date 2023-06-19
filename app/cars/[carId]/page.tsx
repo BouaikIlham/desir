@@ -18,7 +18,7 @@ const page = async ({params} : {params: IParams}) => {
 
       return (
         <>
-            <Navbar />
+            <Navbar currentUser={currentUser} />
             <CarClient
               car={car}
               currentUser={currentUser}
