@@ -14,7 +14,7 @@ export async function DELETE(
         return NextResponse.error()
     }
 
-    const {reservationId} = params
+    const {reservationId} = params;
 
     if (!reservationId || typeof reservationId !== 'string') {
         throw new Error('Invalid Id')
@@ -23,6 +23,10 @@ export async function DELETE(
     const reservation =  await prisma.reservation.deleteMany({
         where: {
             id: reservationId,
+            OR: [
+                {userId: currentUser.id},
+                {car: {userId: currentUser.id}}
+            ]
         }
     })
 

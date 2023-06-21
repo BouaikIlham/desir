@@ -5,6 +5,9 @@ import Container from "../components/Container";
 import Heading from "../components/Heading";
 import CarCard from "../components/cars/CarCard";
 import { SafeReservation, SafeUser } from "../types";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface MyCarsClientProps {
   reservations: SafeReservation[]
@@ -14,9 +17,15 @@ const MyCarsClient: React.FC<MyCarsClientProps>= ({
   reservations,
   currentUser
 }) => {
-
-  const onCancel = useCallback(() => {
-    console.log("test")
+  const router = useRouter()
+  const onCancel = useCallback((id: string) => {
+    axios.delete(`/api/reservations/${id}`)
+    .then(() => {
+      toast.success("reservation cancled")
+      router.refresh()
+    }).catch(() => {
+      toast.error("something went wrong")
+    })
   }, [])
   return (
     <Container>
