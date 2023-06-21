@@ -2,12 +2,16 @@ import Navbar from "./components/navbar/Navbar";
 import getCurrentUser from './actions/getCurrentUser'
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
-import getCars from "./actions/getCars";
+import getCars, { IListingParams }from "./actions/getCars";
 import CarCard from "./components/cars/CarCard";
 
-export default async function  Home() {
+interface HomeProps {
+  searchParams: IListingParams
+
+}
+export default async function  Home({searchParams}: HomeProps) {
   const currentUser = await getCurrentUser();
-  const cars  = await getCars();
+  const cars  = await getCars(searchParams);
   const isEmpty = false
 
   if (isEmpty) {

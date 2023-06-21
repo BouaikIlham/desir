@@ -1,7 +1,28 @@
 import prisma from "../libs/prismadb";
 
-export default async function getReservations() {
+interface IParams {
+  carId?: string;
+  userId?: string;
+  authorId?: string;
+}
+
+export default async function getReservations(params: IParams) {
   try {
+    const {carId, userId, authorId} = params;
+
+    const query: any = {};
+
+    if (carId) {
+      query.carId = carId;
+    }
+
+    if (userId) {
+      query.userId = userId
+    }
+
+    if (authorId) {
+      query.car = {userId: authorId}
+    }
     const reservations = await prisma.reservation.findMany({
       include: {
         car: true,
