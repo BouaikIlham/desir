@@ -22,7 +22,6 @@ export async function DELETE(request: Request, {params}: {params: IParams}){
     const car = await prisma.car.deleteMany({
         where: {
             id: carId,
-            userId: currentUser.id
         }
     })
 

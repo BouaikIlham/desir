@@ -70,9 +70,10 @@ const CarClient: React.FC<CarClientProps> = ({
     .then(() => {
       toast.success('Car reserved!')
       setDateRange(initialDateRange)
-        /// rediredt to trips
+     
+      router.push("/myCars")
 
-        router.refresh();
+        
     })
     .catch(() => {
       toast.error('something went wrong.')
