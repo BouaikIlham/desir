@@ -26,7 +26,7 @@ const MyCarsClient: React.FC<MyCarsClientProps>= ({
     }).catch(() => {
       toast.error("something went wrong")
     })
-  }, [])
+  }, [router])
   return (
     <Container>
       <Heading

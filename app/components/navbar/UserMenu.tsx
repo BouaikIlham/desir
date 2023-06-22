@@ -70,13 +70,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     label="My cars"
                   />
                   <MenuItem
-                    onClick={() => {signOut()}}         
-                    label="Logout"
-                  />
-                  <MenuItem
                     onClick={() => router.push("/user")}         
                     label="My profile"
                   />
+                  <MenuItem
+                    onClick={() => {signOut()}}         
+                    label="Logout"
+                  />
+                  
                 </>
               ) : 
               (

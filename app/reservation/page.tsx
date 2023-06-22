@@ -19,7 +19,8 @@ const page = async () => {
       <Admin>      
 
         <Reservation
-          reservations = {reservations}
+          reservations={reservations}
+          currentUser={currentUser}
         />
       </Admin>  
     )
