@@ -24,6 +24,7 @@ export default async function getReservations(params: IParams) {
       query.car = {userId: authorId}
     }
     const reservations = await prisma.reservation.findMany({
+      where: query,
       include: {
         car: true,
       },
