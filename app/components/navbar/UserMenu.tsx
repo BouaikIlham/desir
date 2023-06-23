@@ -16,9 +16,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
   currentUser
 }) => {
   const registerModal = useRegisterModal()
+  const router = useRouter()
   const loginModal = useLoginModal()
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value)
   }, [])
@@ -27,8 +27,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
       <div className="flex flex-row items-center gap-">
         <div
             className="hidden md:block
-                        text-sm font-medium py-3 px-4 rounded-full">
-          Welcome {currentUser?.name}
+                        text-sm font-medium py-3 px-4 rounded-full">  
+     
+     <button className="cursor pointer"
+                  onClick={() => router.push("/dashboard")}>Admin
+                </button>    
         </div>
         <div
          onClick={toggleOpen}
