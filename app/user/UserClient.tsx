@@ -14,6 +14,7 @@ const UserClient: React.FC<UserClientProps> = ({
 }) => {
   return (
     <Container>
+       <h1 className="text-lg	 text-center mt-4">Welcome {currentUser?.name}</h1>
        <Heading
         title="Favorites"
         subtitle="List of cars you have favorited!"
