@@ -2,7 +2,6 @@
 import useSearchModal from '@/app/hooks/useSearchModal';
 import {BiSearch} from 'react-icons/bi';
 const Search = () => {
-
   const serachModal = useSearchModal()
   return (
     <div 
@@ -20,7 +19,7 @@ const Search = () => {
                       items center 
                       justify-between">
         <div className="text-sm font-medium px-6">
-          Anywhere
+          Any model
         </div>
         <div
           className="hidden
@@ -44,7 +43,7 @@ const Search = () => {
                         items-center
                         gap-3"
         ></div>
-        <div className="hidden sm:block ">Add guests</div>
+        <div className="hidden sm:block ">Add Category</div>
         <div
           className="p-2
             ml-5

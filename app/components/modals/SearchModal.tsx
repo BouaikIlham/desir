@@ -3,6 +3,11 @@ import useSearchModal from "@/app/hooks/useSearchModal";
 import Modal from "./Modal";
 import {useCallback } from "react";
 
+  enum STEPS {
+    MODEL = 0,
+    DATE = 1,
+    CATEGORY = 2,
+  }
 const SearchModal = () => {
     const searchModal = useSearchModal()
 
