@@ -4,6 +4,7 @@ import LoginModal from './components/modals/LoginModal'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import RentModal from './components/modals/RentModal'
+import SearchModal from './components/modals/SearchModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ export default async function RootLayout({
         <Toaster />
         <RentModal />
         <LoginModal />
+        <SearchModal />
         <RegisterModal />
         <div className="">
           {children}
