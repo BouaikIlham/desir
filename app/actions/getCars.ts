@@ -19,6 +19,25 @@ export default async function getCars(params: IListingParams) {
     if (category) {
       query.category = category
     }
+
+    if (startDate && endDate) {
+        query.NOT = {
+            reservations: {
+                some: {
+                    OR: [
+                        {
+                            endDate: {gte: startDate},
+                            startDate: {lte: startDate}
+                        },
+                        {
+                            startDate: {lte: endDate},
+                            endDate: {gte: endDate}
+                        }
+                    ]
+                }
+            }
+        }
+    }
     try {
         const cars = await prisma.car.findMany({
             orderBy: {
