@@ -40,6 +40,7 @@ export default async function getCars(params: IListingParams) {
     }
     try {
         const cars = await prisma.car.findMany({
+            where: query,
             orderBy: {
                 createdAt: 'desc'
             }
